@@ -58,20 +58,8 @@ public class ProductController {
             throw new RuntimeException("You are not authorize");
         }
 
-        ProductDTO needDTO = new ProductDTO();
-        List<ProductDTO> productDTOs = productService.getAll();
-        for (ProductDTO dto : productDTOs) {
-            if (dto.getId().equals(id)) {
-                needDTO = dto;
-            }
-        }
-        /*ProductMapper.MAPPER.toProduct(productService.getAll().get(Math.toIntExact(id)));*/
-        /*Product product = ProductMapper.MAPPER.toProduct(needDTO);
-        ProductDTO dto = ProductDTO.builder()
-                .price(product.getPrice())
-                .title(product.getTitle())
-                .build();*/
-        model.addAttribute("product", needDTO);
+        ProductDTO productDTO = productService.getProduct(id);
+        model.addAttribute("product", productDTO);
         return "editProduct";
     }
 
@@ -93,14 +81,8 @@ public class ProductController {
 
     @GetMapping("/cardProduct/{id}")
     public String cardProductInfo(Model model, @PathVariable("id") Long id) {
-        ProductDTO needDTO = new ProductDTO();
-        List<ProductDTO> productDTOs = productService.getAll();
-        for (ProductDTO dto : productDTOs) {
-            if (dto.getId().equals(id)) {
-                needDTO = dto;
-            }
-        }
-        model.addAttribute("product", ProductMapper.MAPPER.toProduct(needDTO));
+        ProductDTO productDTO = productService.getProduct(id);
+        model.addAttribute("product", productDTO);
         return "cardProduct";
     }
 }

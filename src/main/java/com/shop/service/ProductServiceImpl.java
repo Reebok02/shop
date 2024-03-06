@@ -7,6 +7,7 @@ import com.shop.dto.UserDTO;
 import com.shop.mapper.ProductMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,6 +69,11 @@ public class ProductServiceImpl implements ProductService{
             productRepository.save(savedProduct);
         }
 
+    }
+
+    @Override
+    public ProductDTO getProduct(Long id) {
+        return mapper.fromProduct(productRepository.getReferenceById(id));
     }
 
     @Override
