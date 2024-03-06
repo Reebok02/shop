@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Product list</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<table border="1" text-align="center">
+    <tr>
+        <td>Image</td>
+        <td>Price</td>
+        <td>Name</td>
+        <td>Amount</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td><img th:src="@{'images/' + ${product.imageurl}}" th:width="180" th:height="180"></img></td>
+        <td th:text="${product.getPrice()}">nothing</td>
+        <td><a th:href="@{/products/cardProduct/{id}(id=${product.id})}"><span th:text="${product.name}">product</span></a></td>
+        <td th:text="${product.amount}" text-align="center">nothing</td>
+        <td><a th:href="@{products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
+        <td sec:authorize="hasAnyAuthority('ADMIN')"><a
+                th:href="@{products/editProduct/{id}(id=${product.id})}">Edit</a></td>
+    </tr>
+    <span sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/products/new}">Add new product</a></span>
+</table>
+</body>
+</html>

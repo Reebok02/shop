@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<h1>Product</h1>
+<form th:object="${product}" method="post">
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="text" th:field="*{price}"></td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td><input type="text" th:field="*{amount}"></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" th:field="*{title}"></td>
+        </tr>
+        <tr>
+            <td>ImageURL</td>
+            <td><input type="text" th:field="*{imageurl}"></td>
+        </tr>
+
+    </table>
+    <!--<form th:method="UPDATE"  th:object="${product}">
+        <input type="submit" value="Save">
+    </form>-->
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

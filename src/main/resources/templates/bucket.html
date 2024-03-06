@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Bucket</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<h2>Your bucket</h2>
+<h3>All sum -> <b th:text="${bucket.sum}">1000</b></h3>
+
+<table border="1" text-align="center">
+    <tr>
+        <td>Name</td>
+        <td>Amount</td>
+        <td>Price</td>
+        <td>Sum</td>
+        <td></td>
+    </tr>
+    <tr th:each="detail : ${bucket.bucketDetails}">
+        <td th:text="${detail.name}">Iphone</td>
+        <td th:text="${detail.amount}">22222</td>
+        <td th:text="${detail.price}">30000</td>
+        <td th:text="${detail.sum}">22</td>
+        <!--<td th:text="${detail.productId}">1</td>-->
+        <td><form th:method="DELETE" th:action="@{/bucket/remove/{id}(id=${detail.productId})}">
+            <input type="submit" value="Remove">
+        </form></td>
+    </tr>
+
+    <tr>
+        <h3><a th:href="@{/bucket/clear}">CLEAR THE BUCKET</a></h3>
+    </tr>
+
+</table>
+</body>
+</html>

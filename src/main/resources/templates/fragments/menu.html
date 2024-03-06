@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<table id="nav-menu" width="100%">
+    <tr>
+        <td text-align="center">
+            <table>
+                <tr>
+                    <td>Menu -></td>
+                    <td><a th:href="@{/}">Home</a></td>
+                    <td><a th:href="@{/products}">Products</a></td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
+                    <td sec:authorize="isAuthenticated()"><a th:href="@{/bucket}">Bucket</a></td>
+                </tr>
+            </table>
+        </td>
+
+        <td text-align="right">
+            <div sec:authorize="isAuthenticated()">
+                <table>
+                    <div>
+                        Hello, <a th:href="@{users/profile}"><span
+                            sec:authentication="principal.username">Bill</span></a>
+                    </div>
+                    <div>
+                        <a th:href="@{/logout}">Logout</a>
+                    </div>
+
+                </table>
+            </div>
+
+            <div sec:authorize="!isAuthenticated()">
+                <div>
+                    Hello, Unknown, Please <a th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>
