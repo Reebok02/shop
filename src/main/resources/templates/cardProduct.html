@@ -19,11 +19,14 @@
 
     <div class="card_bottom">
         <div class="card_price"><span th:text="${product.price}">10000</span></div>
-
-        <p th:text="${product.title}" class="card_name">Title</p>
+        <div class="card_name">
+        <p th:text="'Описание товара: ' + ${product.title}">Title</p>
+            <p th:if="${product.amount > 0}"><span th:text="'Осталось в наличие ' + ${product.amount} + ' штук'"></span></p>
+            <p th:unless="${product.amount > 0}"><span th:text="'Нет в наличии'"></span> </p>
+        </div>
     </div>
     <p th:text="${product.name}" class="card_name">Name</p>
-    <button class="card_buy">Buy now</button>
+    <button class="card_buy" >Buy now</button>
     <!--<table border="1" text-align="center">
         <tr>
             <td>Image</td>
