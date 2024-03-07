@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><head>
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
     <meta charset="UTF-8">
     <title>Card product</title>
+    <link rel="stylesheet" href="/styles/card.css">
 </head>
 <body>
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
-<table border="1" text-align="center">
-    <tr>
-        <td>Image</td>
-        <td>Price</td>
-        <td>Name</td>
-        <td>Amount</td>
-        <td>Title</td>
-        <td></td>
-    </tr>
-    <tr th:object="${product}">
-        <td><img th:src="@{'/images' + ${product.imageurl}}" th:width="180" th:height="180"></img></td>
-        <td th:text="${product.getPrice()}">price</td>
-        <td th:text="${product.name}">name</td>
-        <td th:text="${product.amount}">amount</td>
-        <td th:text="${product.title}">Title</td>
-<!--
-        <td><a th:href="@{products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
--->
-<!--
-        <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{products/editProduct/{id}(id=${product.id})}">Edit</a></td>
--->
-    </tr>
-</table>
-<button type="submit">Buy now</button>
+<div class="card" th:object="${product}">
+    <div class="card_top">
+        <img th:src="@{'images/' + ${product.imageurl}}"
+             th:alt="image"
+             class="card_image"
+        />
+    </div>
+
+    <div class="card_bottom">
+        <div class="card_price"><span th:text="${product.price}">10000</span></div>
+
+        <p th:text="${product.title}" class="card_name">Title</p>
+    </div>
+    <p th:text="${product.name}" class="card_name">Name</p>
+    <button class="card_buy">Buy now</button>
+    <!--<table border="1" text-align="center">
+        <tr>
+            <td>Image</td>
+            <td>Price</td>
+            <td>Name</td>
+            <td>Amount</td>
+            <td>Title</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><img th:src="@{'images/' + ${product.imageurl}}" th:width="180" th:height="180"></img></td>
+            <td th:text="${product.getPrice()}">price</td>
+            <td th:text="${product.name}">name</td>
+            <td th:text="${product.amount}">amount</td>
+            <td th:text="${product.title}">Title</td>
+    &lt;!&ndash;
+            <td><a th:href="@{products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
+    &ndash;&gt;
+    &lt;!&ndash;
+            <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{products/editProduct/{id}(id=${product.id})}">Edit</a></td>
+    &ndash;&gt;
+        </tr>
+    </table>
+    <button type="submit">Buy now</button>-->
+</div>
 </body>
 
 </html>
